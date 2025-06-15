@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Habit } from '../types/habit';
 import { CheckCircle2, Circle, Flame, Target, Calendar } from 'lucide-react';
@@ -33,27 +32,37 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggleCompletion, onDele
   
   const completionPercentage = weeklyTarget > 0 ? (weeklyCompletion / weeklyTarget) * 100 : 0;
 
+  const handleToggleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggleCompletion(habit.id, today);
+  };
+
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDelete(habit.id);
+  };
+
   return (
     <div className={cn(
-      "bg-white rounded-2xl shadow-lg border border-gray-100 p-6 transition-all duration-300 hover:shadow-xl hover:scale-105",
+      "bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-6 transition-all duration-300 hover:shadow-xl hover:scale-105",
       isCompletedToday && "ring-2 ring-green-500 ring-opacity-50"
     )}>
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
-          <h3 className="font-bold text-lg text-gray-800 mb-1">{habit.name}</h3>
+          <h3 className="font-bold text-lg text-gray-800 dark:text-gray-200 mb-1">{habit.name}</h3>
           {habit.description && (
-            <p className="text-gray-600 text-sm">{habit.description}</p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">{habit.description}</p>
           )}
         </div>
         <button
-          onClick={() => onToggleCompletion(habit.id, today)}
+          onClick={handleToggleClick}
           className={cn(
             "p-2 rounded-full transition-all duration-200",
             isCompletedToday 
               ? "bg-green-500 text-white hover:bg-green-600" 
               : isTargetDay 
-                ? "bg-gray-100 hover:bg-gray-200 text-gray-600" 
-                : "bg-gray-50 text-gray-400 cursor-not-allowed"
+                ? "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-400" 
+                : "bg-gray-50 dark:bg-gray-800 text-gray-400 dark:text-gray-500 cursor-not-allowed"
           )}
           disabled={!isTargetDay}
         >
@@ -77,7 +86,7 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggleCompletion, onDele
                 stroke="currentColor"
                 strokeWidth="8"
                 fill="none"
-                className="text-gray-200"
+                className="text-gray-200 dark:text-gray-700"
               />
               <circle
                 cx="50"
@@ -98,7 +107,7 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggleCompletion, onDele
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl font-bold text-gray-800">
+              <span className="text-2xl font-bold text-gray-800 dark:text-gray-200">
                 {Math.round(completionPercentage)}%
               </span>
             </div>
@@ -110,23 +119,23 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggleCompletion, onDele
           <div className="text-center">
             <div className="flex items-center justify-center mb-1">
               <Flame className="w-4 h-4 text-orange-500 mr-1" />
-              <span className="text-xs text-gray-600">Racha</span>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Racha</span>
             </div>
-            <div className="font-bold text-lg text-gray-800">{habit.streak}</div>
+            <div className="font-bold text-lg text-gray-800 dark:text-gray-200">{habit.streak}</div>
           </div>
           <div className="text-center">
             <div className="flex items-center justify-center mb-1">
               <Target className="w-4 h-4 text-blue-500 mr-1" />
-              <span className="text-xs text-gray-600">Mejor</span>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Mejor</span>
             </div>
-            <div className="font-bold text-lg text-gray-800">{habit.longestStreak}</div>
+            <div className="font-bold text-lg text-gray-800 dark:text-gray-200">{habit.longestStreak}</div>
           </div>
           <div className="text-center">
             <div className="flex items-center justify-center mb-1">
               <Calendar className="w-4 h-4 text-purple-500 mr-1" />
-              <span className="text-xs text-gray-600">Semana</span>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Semana</span>
             </div>
-            <div className="font-bold text-lg text-gray-800">{weeklyCompletion}/{weeklyTarget}</div>
+            <div className="font-bold text-lg text-gray-800 dark:text-gray-200">{weeklyCompletion}/{weeklyTarget}</div>
           </div>
         </div>
 
@@ -146,8 +155,8 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggleCompletion, onDele
                   isCompleted 
                     ? "bg-green-500 text-white" 
                     : isTargetDay 
-                      ? "bg-gray-200 text-gray-700" 
-                      : "bg-gray-100 text-gray-400"
+                      ? "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300" 
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500"
                 )}
               >
                 {day}
@@ -158,8 +167,8 @@ const HabitCard: React.FC<HabitCardProps> = ({ habit, onToggleCompletion, onDele
       </div>
 
       <button
-        onClick={() => onDelete(habit.id)}
-        className="mt-4 w-full text-sm text-red-500 hover:text-red-700 transition-colors"
+        onClick={handleDeleteClick}
+        className="mt-4 w-full text-sm text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
       >
         Eliminar hábito
       </button>

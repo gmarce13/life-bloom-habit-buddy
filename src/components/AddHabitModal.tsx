@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { X, Plus } from 'lucide-react';
 import { HabitCategory, HABIT_CATEGORIES } from '../types/habit';
@@ -70,53 +69,53 @@ const AddHabitModal: React.FC<AddHabitModalProps> = ({ isOpen, onClose, onAdd })
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold text-gray-800">Nuevo Hábito</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Nuevo Hábito</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Nombre del hábito
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               placeholder="Ej: Beber 8 vasos de agua"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Descripción (opcional)
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               placeholder="Describe tu hábito..."
               rows={3}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Categoría
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as HabitCategory)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
             >
               {Object.entries(HABIT_CATEGORIES).map(([key, value]) => (
                 <option key={key} value={key}>
@@ -127,7 +126,7 @@ const AddHabitModal: React.FC<AddHabitModalProps> = ({ isOpen, onClose, onAdd })
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Días de la semana
             </label>
             <div className="flex gap-2">
@@ -140,7 +139,7 @@ const AddHabitModal: React.FC<AddHabitModalProps> = ({ isOpen, onClose, onAdd })
                     "w-10 h-10 rounded-full font-medium text-sm transition-all",
                     targetDays.includes(index)
                       ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                   )}
                 >
                   {day}
@@ -150,7 +149,7 @@ const AddHabitModal: React.FC<AddHabitModalProps> = ({ isOpen, onClose, onAdd })
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Color
             </label>
             <div className="flex gap-2 flex-wrap">
@@ -162,7 +161,7 @@ const AddHabitModal: React.FC<AddHabitModalProps> = ({ isOpen, onClose, onAdd })
                   className={cn(
                     "w-8 h-8 rounded-full transition-all",
                     color,
-                    selectedColor === color && "ring-4 ring-gray-300"
+                    selectedColor === color && "ring-4 ring-gray-300 dark:ring-gray-600"
                   )}
                 />
               ))}
@@ -173,7 +172,7 @@ const AddHabitModal: React.FC<AddHabitModalProps> = ({ isOpen, onClose, onAdd })
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-lg font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               Cancelar
             </button>
