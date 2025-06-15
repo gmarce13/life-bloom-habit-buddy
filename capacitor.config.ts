@@ -2,7 +2,7 @@
 import { CapacitorConfig } from '@capacitor/core';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.56f273c6e9ce4193a47d1cf71c71cdca',
+  appId: 'com.lovable.habittracker',
   appName: 'Habit Tracker',
   webDir: 'dist',
   server: {
